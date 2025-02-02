@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ArrowUp } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface Message {
   role: "user" | "ai";
@@ -49,8 +49,9 @@ function ChatInterface() {
       }
 
       setMessages((messages) => [...messages, { role: "ai", content: result }]);
-    } catch (error) {
+    } catch (err) {
       setMessages((messages) => [...messages, { role: "ai", content: errMsg }]);
+      console.error(err);
     } finally {
       setLoading(false);
     }
